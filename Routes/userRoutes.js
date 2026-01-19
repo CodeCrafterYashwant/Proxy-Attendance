@@ -24,13 +24,7 @@ router.post('/signup', async (req, res) => {
         const response = await newUser.save();
         console.log('User saved');
 
-        const payload = {
-            id: response.id,
-            role: response.role
-        };
-        
-        const token = generateToken(payload);
-        res.status(200).json({ response: response, token: token });
+        res.status(200).json({ response: 'ok' });
 
     } catch (err) {
         console.log(err);
