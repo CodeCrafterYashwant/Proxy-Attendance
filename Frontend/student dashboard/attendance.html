@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mark Attendance | Student Portal</title>
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+  <link rel="stylesheet" href="studentdashboard.css">
+  <style>
+    /* Specific styles for the location step */
+    .location-box {
+      background: #f8fafc;
+      border: 1px dashed #cbd5e1;
+      padding: 15px;
+      border-radius: 12px;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+    .location-status {
+      font-size: 0.9rem;
+      margin-top: 8px;
+      color: #64748b;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+    }
+    .btn-location {
+      background: #e0f2fe;
+      color: #0284c7;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 8px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    .btn-location:hover {
+      background: #bae6fd;
+    }
+    .btn-location.success {
+      background: #dcfce7;
+      color: #166534;
+      pointer-events: none; /* Disable click after success */
+    }
+    /* Disable submit button style */
+    .btn-submit:disabled {
+      background: #94a3b8;
+      cursor: not-allowed;
+      opacity: 0.7;
+    }
+  </style>
+</head>
+<body>
+
+<div class="dashboard-container">
+
+  <aside class="sidebar">
+    <h2 class="logo"><i class="ri-graduation-cap-fill"></i> My Studies</h2>
+    <p class="section-title">Menu</p>
+    <ul class="nav-list">
+      <li>
+        <a href="studentdashboard.html"><i class="ri-dashboard-line"></i> Dashboard</a>
+      </li>
+      <li class="active">
+        <a href="attendance.html"><i class="ri-checkbox-circle-line"></i> Mark Attendance</a>
+      </li>
+      <li>
+        <a href="analytics.html"><i class="ri-bar-chart-grouped-line"></i> Analytics</a>
+      </li>
+      <li>
+          <a href="change-password.html"><i class="ri-lock-password-line"></i> Change Password</a>
+      </li>
+      <li><a href="maintainance.html"><i class="ri-account-circle-line"></i> Face Recognition</a></li>
+
+    </ul>
+    <div class="logout-section">
+      <a href="#" id="logoutBtn" class="logout-btn"><i class="ri-logout-box-line"></i> Logout</a>
+    </div>
+  </aside>
+
+  <main class="main">
+    <header style="margin-bottom: 30px;">
+      <h2 id="userNameDisplay">Mark Attendance</h2>
+      <p style="color: gray;">Verify your location to mark your presence.</p>
+    </header>
+
+    <div class="attendance-layout" style="display: flex; gap: 30px; flex-wrap: wrap;">
+      
+      <div class="card" style="flex: 1; min-width: 300px;">
+        <h3 style="margin-bottom: 20px;">New Session</h3>
+        
+        <form id="attendanceForm">
+          <div class="form-group" style="margin-bottom: 15px;">
+            <label style="font-weight: 500; display: block; margin-bottom: 5px;">Session ID</label>
+            <input type="text" id="sessionId" placeholder="e.g. SES-101" 
+                   style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px;" required>
+          </div>
+          <div class="form-group" style="margin-bottom: 20px;">
+            <label style="font-weight: 500; display: block; margin-bottom: 5px;">OTP Code</label>
+            <input type="text" id="otpCode" placeholder="Enter 4-digit OTP" maxlength="4" 
+                   style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px;" required>
+          </div>
+
+          <div class="location-box">
+            <button type="button" id="locationBtn" class="btn-location">
+              <i class="ri-map-pin-line"></i> Detect My Location
+            </button>
+            <p class="location-status" id="locationStatus">Location required to submit.</p>
+          </div>
+
+          <button type="submit" class="btn-submit" id="submitBtn" 
+                  style="width: 100%; padding: 12px; background: #5b6cff; color: white; border: none; border-radius: 10px; font-size: 16px; cursor: pointer;" disabled>
+            Submit Attendance
+          </button>
+        </form>
+      </div>
+
+      <div class="card" style="flex: 1; min-width: 300px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+          <h3>History</h3>
+          <button onclick="loadAttendancePageHistory()" style="background:none; border:none; color:#5b6cff; cursor:pointer;">
+            <i class="ri-refresh-line"></i> Refresh
+          </button>
+        </div>
+        
+        <div id="historyList">
+          <p style="text-align: center; color: #94a3b8; font-style: italic;">Loading history...</p>
+        </div>
+      </div>
+
+    </div>
+  </main>
+</div>
+
+<script src="student-common.js"></script>
+<script src="attendance-logic.js"></script>
+</body>
+</html>

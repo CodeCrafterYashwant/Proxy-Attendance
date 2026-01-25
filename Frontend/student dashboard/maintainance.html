@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Site Under Construction</title>
+    <style>
+        /* --- CSS STYLES --- */
+        :root {
+            --primary-color: #ff6b6b; /* Soft Red/Orange */
+            --bg-color: #0f172a;      /* Dark Blue/Slate */
+            --text-color: #e2e8f0;    /* Off-white */
+            --glass-bg: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(255, 255, 255, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            background-image: radial-gradient(circle at top right, #1e293b, var(--bg-color));
+            color: var(--text-color);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        /* Main Container */
+        .container {
+            text-align: center;
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            max-width: 600px;
+            width: 90%;
+            animation: fadeIn 1.5s ease-out;
+        }
+
+        /* Icon Animation */
+        .gear-icon {
+            width: 80px;
+            height: 80px;
+            margin-bottom: 1rem;
+            fill: var(--primary-color);
+            animation: spin 10s linear infinite;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            letter-spacing: 1px;
+        }
+
+        p {
+            font-size: 1.1rem;
+            color: #94a3b8;
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+
+        /* Countdown Timer Styles */
+        .countdown {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .time-box {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .time-val {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+
+        .time-text {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #94a3b8;
+        }
+
+        /* Form Styles */
+        .notify-form {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+        }
+
+        input[type="email"] {
+            padding: 12px 20px;
+            border-radius: 50px;
+            border: none;
+            outline: none;
+            width: 70%;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border: 1px solid var(--glass-border);
+            transition: all 0.3s ease;
+        }
+
+        input[type="email"]:focus {
+            background: rgba(255, 255, 255, 0.2);
+            border-color: var(--primary-color);
+        }
+
+        button {
+            padding: 12px 25px;
+            border-radius: 50px;
+            border: none;
+            background-color: var(--primary-color);
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.2s ease, background 0.3s;
+        }
+
+        button:hover {
+            transform: scale(1.05);
+            background-color: #ff5252;
+        }
+
+        /* Feedback Message */
+        #message {
+            margin-top: 15px;
+            font-size: 0.9rem;
+            height: 20px; /* reserve space */
+            color: #4ade80; /* Green for success */
+            opacity: 0;
+            transition: opacity 0.5s;
+        }
+
+        /* Animations */
+        @keyframes spin { 
+            100% { transform: rotate(360deg); } 
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Mobile Adjustments */
+        @media (max-width: 480px) {
+            h1 { font-size: 1.8rem; }
+            .countdown { gap: 0.8rem; }
+            .time-val { font-size: 1.5rem; }
+            .notify-form { flex-direction: column; }
+            input[type="email"] { width: 100%; }
+            button { width: 100%; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <svg class="gear-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M19.14,12.94c0.04-0.3,0.06-0.61,0.06-0.94c0-0.32-0.02-0.64-0.07-0.94l2.03-1.58c0.18-0.14,0.23-0.41,0.12-0.61 l-1.92-3.32c-0.12-0.22-0.37-0.29-0.59-0.22l-2.39,0.96c-0.5-0.38-1.03-0.7-1.62-0.94L14.4,2.81c-0.04-0.24-0.24-0.41-0.48-0.41 h-3.84c-0.24,0-0.43,0.17-0.47,0.41L9.25,5.35C8.66,5.59,8.12,5.92,7.63,6.29L5.24,5.33c-0.22-0.08-0.47,0-0.59,0.22L2.74,8.87 C2.62,9.08,2.66,9.34,2.86,9.48l2.03,1.58C4.84,11.36,4.8,11.69,4.8,12s0.02,0.64,0.07,0.94l-2.03,1.58 c-0.18,0.14-0.23,0.41-0.12,0.61l1.92,3.32c0.12,0.22,0.37,0.29,0.59,0.22l2.39-0.96c0.5,0.38,1.03,0.7,1.62,0.94l0.36,2.54 c0.05,0.24,0.24,0.41,0.48,0.41h3.84c0.24,0,0.44-0.17,0.47-0.41l0.36-2.54c0.59-0.24,1.13-0.56,1.62-0.94l2.39,0.96 c0.22,0.08,0.47,0,0.59-0.22l1.92-3.32c0.12-0.22,0.07-0.47-0.12-0.61L19.14,12.94z M12,15.6c-1.98,0-3.6-1.62-3.6-3.6 s1.62-3.6,3.6-3.6s3.6,1.62,3.6,3.6S13.98,15.6,12,15.6z"/>
+        </svg>
+
+        <h1>Under Construction</h1>
+        <p>We are currently working on something awesome. We will be back shortly with a new experience.</p>
+
+        <div class="countdown">
+            <div class="time-box">
+                <span class="time-val" id="days">00</span>
+                <span class="time-text">Days</span>
+            </div>
+            <div class="time-box">
+                <span class="time-val" id="hours">00</span>
+                <span class="time-text">Hours</span>
+            </div>
+            <div class="time-box">
+                <span class="time-val" id="minutes">00</span>
+                <span class="time-text">Mins</span>
+            </div>
+            <div class="time-box">
+                <span class="time-val" id="seconds">00</span>
+                <span class="time-text">Secs</span>
+            </div>
+        </div>
+
+        <form class="notify-form" onsubmit="handleSubscribe(event)">
+            <input type="email" placeholder="Enter your email to get notified" required>
+            <button type="submit">Notify Me</button>
+        </form>
+        <div id="message">Thanks! We'll be in touch.</div>
+    </div>
+
+    <script>
+        /* --- JAVASCRIPT LOGIC --- */
+
+        // 1. Set the date we're counting down to (10 days from now for demo purposes)
+        const countDownDate = new Date();
+        countDownDate.setDate(countDownDate.getDate() + 10); // Adds 10 days to current date
+
+        // 2. Update the count down every 1 second
+        const x = setInterval(function() {
+
+            // Get today's date and time
+            const now = new Date().getTime();
+
+            // Find the distance between now and the count down date
+            const distance = countDownDate - now;
+
+            // Time calculations for days, hours, minutes and seconds
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            // Output the result in the elements with id="demo"
+            document.getElementById("days").innerText = days < 10 ? "0" + days : days;
+            document.getElementById("hours").innerText = hours < 10 ? "0" + hours : hours;
+            document.getElementById("minutes").innerText = minutes < 10 ? "0" + minutes : minutes;
+            document.getElementById("seconds").innerText = seconds < 10 ? "0" + seconds : seconds;
+
+            // If the count down is over, write some text 
+            if (distance < 0) {
+                clearInterval(x);
+                document.querySelector(".countdown").innerHTML = "EXPIRED";
+            }
+        }, 1000);
+
+        // 3. Handle Form Subscription
+        function handleSubscribe(e) {
+            e.preventDefault(); // Stop page refresh
+            const msgElement = document.getElementById('message');
+            const input = document.querySelector('input[type="email"]');
+            
+            // Simulate an API call
+            msgElement.style.opacity = "1";
+            input.value = ""; // Clear input
+            
+            // Hide message after 3 seconds
+            setTimeout(() => {
+                msgElement.style.opacity = "0";
+            }, 3000);
+        }
+    </script>
+</body>
+</html>

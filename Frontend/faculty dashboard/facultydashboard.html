@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Faculty Dashboard</title>
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@4.8.0/fonts/remixicon.css" rel="stylesheet" />
+  <link rel="stylesheet" href="facultydashboard.css">
+</head>
+<body>
+
+  <div class="dashboard-container">
+    
+    <aside class="sidebar">
+      <h2 class="logo"><i class="ri-user-star-fill"></i> Faculty Portal</h2>
+      <p class="section-title">Menu</p>
+      <ul class="nav-list">
+        <li class="active">
+          <a href="facultydashboard.html"><i class="ri-dashboard-line"></i> Dashboard</a>
+        </li>
+        <li>
+          <a href="take-attendance.html"><i class="ri-calendar-event-line"></i> Take Attendance</a>
+        </li>
+        <li>
+          <a href="f-change-password.html"><i class="ri-lock-password-line"></i> Change Password</a>
+        </li>
+      </ul>
+      <div class="logout-section">
+        <a href="#" id="logoutBtn" class="logout-btn"><i class="ri-logout-box-line"></i> Logout</a>
+      </div>
+    </aside>
+
+    <div class="content-wrapper">
+      
+      <main class="main">
+        
+        <section class="welcome-card">
+          <div class="welcome-text">
+            <h2 id="userNameDisplay">Good Afternoon, Professor!</h2>
+            <p>Ready to manage your classes today?</p>
+          </div>
+        </section>
+
+        <div class="card recent-history">
+          <div class="card-header">
+            <h4><i class="ri-history-line"></i> Recent Activity (Last 5 Sessions)</h4>
+          </div>
+          
+          <div class="history-table-header">
+            <span>Date & Time</span>
+            <span>Subject</span>
+            <span>Attended</span>
+            <span>Action</span>
+          </div>
+          
+          <div id="facultySessionList" class="history-list-container">
+            <p style="text-align:center; padding: 20px; color: #888;">Loading recent sessions...</p>
+          </div>
+        </div>
+
+      </main>
+
+      <aside class="right-panel">
+        
+        <div class="calendar-card">
+          <div class="calendar-header">
+            <h3 id="currentMonthYear">Month Year</h3>
+            <div class="calendar-nav">
+              <i class="ri-arrow-left-s-line" id="prevMonth"></i>
+              <i class="ri-arrow-right-s-line" id="nextMonth"></i>
+            </div>
+          </div>
+          <div class="calendar-days">
+            <span>S</span><span>M</span><span>T</span><span>W</span><span>T</span><span>F</span><span>S</span>
+          </div>
+          <div class="calendar-grid" id="calendarGrid">
+            </div>
+        </div>
+
+        <div class="card notice-board">
+          <h3><i class="ri-notification-3-line"></i> Important Notices</h3>
+          
+          <div class="notice-item">
+            <div class="icon-box warning"><i class="ri-error-warning-line"></i></div>
+            <div class="notice-content">
+              <p class="notice-title">Marks Submission</p>
+              <span class="notice-date">Due: Jan 30</span>
+            </div>
+          </div>
+
+          <div class="notice-item">
+            <div class="icon-box info"><i class="ri-calendar-check-line"></i></div>
+            <div class="notice-content">
+              <p class="notice-title">Faculty Meeting</p>
+              <span class="notice-date">Friday, 10:00 AM</span>
+            </div>
+          </div>
+
+          <div class="notice-item">
+            <div class="icon-box danger"><i class="ri-shut-down-line"></i></div>
+            <div class="notice-content">
+              <p class="notice-title">System Maintenance</p>
+              <span class="notice-date">Sunday, 12 PM - 2 PM</span>
+            </div>
+          </div>
+        </div>
+
+      </aside>
+
+    </div>
+  </div>
+
+  <div id="studentListModal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 id="modalTitle">Student List</h3>
+        <span class="close-modal">&times;</span>
+      </div>
+      <div class="modal-body">
+        <ul id="modalStudentList" class="student-list-ul">
+          </ul>
+      </div>
+    </div>
+  </div>
+
+  <script src="faculty-common.js"></script>
+  <script src="facultydashboard.js"></script>
+
+</body>
+</html>

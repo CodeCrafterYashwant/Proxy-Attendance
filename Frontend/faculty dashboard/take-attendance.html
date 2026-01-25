@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Take Attendance | Faculty Portal</title>
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@4.8.0/fonts/remixicon.css" rel="stylesheet" />
+  <link rel="stylesheet" href="facultydashboard.css">
+  <link rel="stylesheet" href="take-attendance.css">
+</head>
+<body>
+
+  <div class="dashboard-container">
+    
+    <aside class="sidebar">
+      <h2 class="logo"><i class="ri-user-star-fill"></i> Faculty Portal</h2>
+      <p class="section-title">Menu</p>
+      <ul class="nav-list">
+        <li><a href="facultydashboard.html"><i class="ri-dashboard-line"></i> Dashboard</a></li>
+        <li class="active"><a href="take-attendance.html"><i class="ri-calendar-event-line"></i> Take Attendance</a></li>
+        <li><a href="f-change-password.html"><i class="ri-lock-password-line"></i> Change Password</a></li>
+      </ul>
+      <div class="logout-section">
+        <a href="#" id="logoutBtn" class="logout-btn"><i class="ri-logout-box-line"></i> Logout</a>
+      </div>
+    </aside>
+
+    <div class="content-wrapper">
+      <main class="main">
+        
+        <div class="hero-card">
+          <div class="hero-content">
+            <h1 id="userNameDisplay">Classroom Mode</h1>
+            <p>Start a new attendance session, verify your location, and generate a secure OTP for your students.</p>
+            <div class="hero-stats">
+              <span><i class="ri-map-pin-user-fill"></i> Geo-Fenced</span>
+              <span><i class="ri-shield-keyhole-fill"></i> OTP Secured</span>
+            </div>
+          </div>
+          <div class="hero-image-container">
+            <img src="attendance-banner.png" alt="Classroom Attendance" class="hero-img">
+          </div>
+        </div>
+
+        <div class="attendance-grid-layout">
+          
+          <div class="card create-session-card">
+            <div class="card-header">
+              <h3><i class="ri-add-circle-line"></i> Start New Session</h3>
+            </div>
+            
+            <div id="setupSection">
+              <div class="form-group">
+                <label>Subject / Class Name</label>
+                <div class="input-wrapper">
+                  <i class="ri-book-open-line"></i>
+                  <input type="text" id="subjectName" placeholder="e.g. Engineering Mathematics III">
+                </div>
+              </div>
+              
+              <button id="startSessionBtn" class="btn-primary">
+                <i class="ri-broadcast-line"></i> Verify Location & Start
+              </button>
+            </div>
+
+            <div id="sessionResult" class="session-active-box">
+              <div class="otp-container">
+                <span class="otp-label">SESSION OTP</span>
+                <h1 id="displayOTP">----</h1>
+              </div>
+              <div class="session-details">
+                <p id="displaySessionID">ID: ...</p>
+                <div class="timer-badge">
+                  <i class="ri-timer-flash-line"></i> <span id="sessionTimer">60s</span>
+                </div>
+              </div>
+              <button id="shareWhatsappBtn" class="whatsapp-btn">
+                <i class="ri-whatsapp-line"></i> Share on WhatsApp
+              </button>
+            </div>
+          </div>
+
+          <div class="card history-card">
+            <div class="card-header" style="display:flex; justify-content:space-between; align-items:center;">
+              <h3><i class="ri-history-line"></i> History</h3>
+              <button id="refreshHistory" class="refresh-btn"><i class="ri-refresh-line"></i></button>
+            </div>
+
+            <div class="history-grid-header">
+              <span>Date & Time</span>
+              <span>Subject</span>
+              <span>Count</span>
+              <span>Action</span>
+            </div>
+
+            <div id="historyListContainer" class="history-list-container">
+              <p style="text-align:center; padding: 20px; color: #888;">Loading history...</p>
+            </div>
+          </div>
+
+        </div>
+
+      </main>
+    </div>
+  </div>
+
+  <div id="studentListModal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 id="modalTitle">Student List</h3>
+        <span class="close-modal">&times;</span>
+      </div>
+      <div class="modal-body">
+        <ul id="modalStudentList" class="student-list-ul"></ul>
+      </div>
+    </div>
+  </div>
+
+  <script src="faculty-common.js"></script>
+  <script src="take-attendance.js"></script>
+</body>
+</html>

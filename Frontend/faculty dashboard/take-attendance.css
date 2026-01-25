@@ -1,0 +1,293 @@
+/* --- HERO SECTION --- */
+.hero-card {
+  background: linear-gradient(135deg, #5b6cff, #818cf8);
+  border-radius: 20px;
+  padding: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+  box-shadow: 0 10px 30px rgba(91, 108, 255, 0.1);
+  overflow: hidden;
+  position: relative;
+}
+
+.hero-content {
+  padding: 40px;
+  flex: 1;
+  z-index: 2;
+}
+
+.hero-content h1 {
+  font-size: 2rem;
+  color: #1e293b;
+  margin-bottom: 10px;
+  background: linear-gradient(90deg, #ffffff, #ffffff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.hero-content p {
+  color: #ffffff;
+  margin-bottom: 20px;
+  max-width: 400px;
+  line-height: 1.5;
+}
+
+.hero-stats {
+  display: flex;
+  gap: 15px;
+}
+
+.hero-stats span {
+  background: #f1f5f9;
+  padding: 8px 15px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  color: #475569;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.hero-stats span i { color: #5b6cff; }
+
+/* Image Styling */
+.hero-image-container {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding-right: 30px;
+  position: relative;
+}
+
+.hero-img {
+  height: 220px; /* Adjust based on your image preference */
+  object-fit: contain;
+  filter: drop-shadow(0 10px 15px rgba(0,0,0,0.1));
+  transition: transform 0.3s ease;
+}
+
+.hero-card:hover .hero-img {
+  transform: scale(1.02) translateY(-5px);
+}
+
+
+/* --- LAYOUT GRID --- */
+.attendance-grid-layout {
+  display: grid;
+  grid-template-columns: 1fr 1.5fr; /* Left panel smaller, Right panel wider */
+  gap: 30px;
+}
+
+@media (max-width: 1024px) {
+  .attendance-grid-layout { grid-template-columns: 1fr; }
+  .hero-card { flex-direction: column; text-align: center; }
+  .hero-image-container { justify-content: center; padding: 0 0 20px 0; }
+  .hero-content { padding: 30px; }
+  .hero-stats { justify-content: center; }
+}
+
+
+/* --- CREATE SESSION CARD --- */
+.create-session-card {
+  height: fit-content;
+}
+
+.input-wrapper {
+  position: relative;
+  margin-top: 8px;
+}
+
+.input-wrapper i {
+  position: absolute;
+  left: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #94a3b8;
+}
+
+.input-wrapper input {
+  width: 100%;
+  padding: 14px 14px 14px 45px; /* Space for icon */
+  border: 2px solid #e2e8f0;
+  border-radius: 12px;
+  font-size: 0.95rem;
+  transition: 0.3s;
+}
+
+.input-wrapper input:focus {
+  border-color: #5b6cff;
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(91, 108, 255, 0.1);
+}
+
+#startSessionBtn {
+  width: 100%;
+  margin-top: 20px;
+  padding: 14px;
+  background: linear-gradient(135deg, #5b6cff 0%, #4338ca 100%);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  transition: 0.3s;
+  box-shadow: 0 4px 12px rgba(91, 108, 255, 0.3);
+}
+
+#startSessionBtn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(91, 108, 255, 0.4);
+}
+
+
+/* --- ACTIVE SESSION BOX (OTP) --- */
+.session-active-box {
+  background: #fdf2f8; /* Soft pink/purple tint */
+  border: 2px dashed #db2777;
+  border-radius: 15px;
+  padding: 20px;
+  margin-top: 25px;
+  text-align: center;
+  display: none;
+  animation: popIn 0.4s ease;
+}
+
+@keyframes popIn {
+  from { opacity: 0; transform: scale(0.9); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.otp-label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #be185d;
+  letter-spacing: 1px;
+}
+
+#displayOTP {
+  font-size: 3.5rem;
+  color: #be185d;
+  letter-spacing: 5px;
+  margin: 5px 0 15px 0;
+  font-family: 'Segoe UI', monospace;
+}
+
+.session-details {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid rgba(190, 24, 93, 0.1);
+  padding-top: 15px;
+}
+
+#displaySessionID {
+  font-size: 0.8rem;
+  color: #831843;
+  font-weight: 600;
+}
+
+.timer-badge {
+  background: #be185d;
+  color: white;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+
+/* --- HISTORY CARD --- */
+.history-card {
+  min-height: 400px;
+}
+
+.refresh-btn {
+  background: transparent;
+  border: none;
+  color: #5b6cff;
+  font-size: 1.2rem;
+  cursor: pointer;
+  padding: 5px;
+  border-radius: 50%;
+  transition: 0.2s;
+}
+
+.refresh-btn:hover { background: #eff6ff; }
+
+/* Grid Header */
+.history-grid-header {
+  display: grid;
+  grid-template-columns: 1.5fr 1.5fr 1fr 1fr; /* Must match JS */
+  padding: 12px 15px;
+  background: #f8fafc;
+  color: #64748b;
+  font-weight: 600;
+  font-size: 0.85rem;
+  border-radius: 8px;
+  margin-top: 15px;
+  margin-bottom: 10px;
+}
+
+/* Rows (Targeted by JS) */
+.history-row {
+  display: grid;
+  grid-template-columns: 1.5fr 1.5fr 1fr 1fr; /* Must match Header */
+  padding: 15px;
+  border-bottom: 1px solid #f1f5f9;
+  align-items: center;
+  font-size: 0.9rem;
+}
+
+.history-row:hover {
+  background: #f8fafc;
+}
+
+.badge {
+  display: inline-block;
+  white-space: nowrap;
+}
+
+/* --- WHATSAPP BUTTON --- */
+.whatsapp-btn {
+  width: 100%;
+  margin-top: 15px;
+  padding: 10px;
+  background: #25D366; /* Official WhatsApp Green */
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  transition: background 0.2s;
+}
+
+.whatsapp-btn:hover {
+  background: #1ebc57;
+}
+
+.whatsapp-btn i {
+  font-size: 1.2rem;
+}
+.card {
+    background: #c9cad53b;
+    border-radius: 20px;
+    padding: 25px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+}

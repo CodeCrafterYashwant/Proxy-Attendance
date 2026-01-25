@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Analytics | Student Portal</title>
+  
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@4.8.0/fonts/remixicon.css" rel="stylesheet" />
+  <link rel="stylesheet" href="studentdashboard.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <style>
+    /* Analytics Grid Layout */
+    .analytics-top-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 25px;
+      margin-bottom: 30px;
+    }
+
+    .stat-card {
+      background: #a7a7fc3a;
+      padding: 25px;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: 140px;
+    }
+
+    .card-title { font-size: 0.9rem; font-weight: 700; color: #64748b; margin-bottom: 10px; }
+    .big-number { font-size: 2.5rem; font-weight: 700; color: #1e293b; }
+
+    /* Progress Bar */
+    .progress-container {
+      width: 100%;
+      background-color: #f1f5f9;
+      border-radius: 10px;
+      height: 8px;
+      margin-top: 15px;
+      overflow: hidden;
+    }
+    .progress-bar { height: 100%; border-radius: 10px; transition: width 1s ease; }
+    .progress-label { font-size: 0.8rem; color: #94a3b8; margin-top: 8px; }
+    
+    .bar-blue { background: #5b6cff; }
+    .bar-red { background: #ef4444; }
+
+    /* Bottom Section */
+    .analytics-bottom-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 25px;
+    }
+
+    .trend-card, .subject-card {
+      background: white;
+      padding: 25px;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+    }
+
+    .trend-header {
+      display: flex; align-items: center; gap: 10px; margin-bottom: 20px;
+      font-weight: 700; color: #333;
+    }
+
+    /* Subject Wise List Styles */
+    .subject-item {
+      margin-bottom: 15px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid #f8fafc;
+    }
+    .subject-item:last-child { border-bottom: none; }
+    
+    .subject-name {
+      display: flex; justify-content: space-between; font-weight: 600; color: #333; font-size: 0.9rem;
+    }
+    .subject-count { color: #5b6cff; }
+
+    @media (max-width: 1024px) {
+      .analytics-top-grid, .analytics-bottom-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="dashboard-container">
+    
+    <aside class="sidebar">
+      <h2 class="logo"><i class="ri-graduation-cap-fill"></i> My Studies</h2>
+      <p class="section-title">Menu</p>
+      <ul class="nav-list">
+        <li><a href="studentdashboard.html"><i class="ri-dashboard-line"></i> Dashboard</a></li>
+        <li><a href="attendance.html"><i class="ri-checkbox-circle-line"></i> Mark Attendance</a></li>
+        <li class="active"><a href="analytics.html"><i class="ri-bar-chart-grouped-line"></i> Analytics</a></li>
+        <li><a href="change-password.html"><i class="ri-lock-password-line"></i> Change Password</a></li>
+                <li><a href="maintainance.html"><i class="ri-account-circle-line"></i> Face Recognition</a></li>
+
+      </ul>
+      <div class="logout-section">
+        <a href="#" id="logoutBtn" class="logout-btn"><i class="ri-logout-box-line"></i> Logout</a>
+      </div>
+    </aside>
+
+    <div class="content-wrapper">
+      <main class="main">
+        
+        <header class="header" style="margin-bottom: 30px;">
+          <div class="welcome-text">
+            <h1 id="userNameDisplay">Performance Analytics</h1>
+            <p style="color: #64748b;">Detailed breakdown of your attendance.</p>
+          </div>
+        </header>
+
+        <div class="analytics-top-grid">
+          <div class="stat-card">
+            <div><div class="card-title">Total Classes</div><div class="big-number" id="totalClasses">100</div></div>
+          </div>
+          <div class="stat-card">
+            <div><div class="card-title">Present</div><div class="big-number" id="presentPercentage">0%</div></div>
+            <div><div class="progress-container"><div class="progress-bar bar-blue" id="presentBar" style="width: 0%"></div></div><div class="progress-label">Attendance Rate</div></div>
+          </div>
+          <div class="stat-card">
+            <div><div class="card-title">Absent</div><div class="big-number" id="absentPercentage">0%</div></div>
+            <div><div class="progress-container"><div class="progress-bar bar-red" id="absentBar" style="width: 0%"></div></div><div class="progress-label">Missed Classes</div></div>
+          </div>
+        </div>
+
+        <div class="analytics-bottom-grid">
+          
+          <div class="trend-card">
+            <div class="trend-header"><i class="ri-line-chart-line"></i> Recent Trend</div>
+            <canvas id="trendChart" style="max-height: 250px;"></canvas>
+          </div>
+
+          <div class="subject-card">
+            <div class="trend-header"><i class="ri-pie-chart-line"></i> Subject Wise</div>
+            
+            <div id="subjectPerformanceList">
+              <p style="color:#94a3b8; font-size:0.9rem;">Loading subjects...</p>
+            </div>
+          </div>
+
+        </div>
+
+      </main>
+    </div>
+  </div>
+
+  <script src="student-common.js"></script>
+  <script src="analytics.js"></script>
+
+</body>
+</html>
