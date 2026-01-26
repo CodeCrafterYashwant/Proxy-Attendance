@@ -144,7 +144,7 @@ router.post('/mark', jwtAuthMiddleware, async (req, res) => {
 
         const dist = getDistance(parseFloat(session.center_location.latitude), parseFloat(session.center_location.longitude), parseFloat(latitude), parseFloat(longitude));
         
-        if (dist > 100) return res.status(403).json({ message: `Location Mismatch. ${Math.round(dist)}m away.` });
+        if (dist > 10) return res.status(403).json({ message: `Location Mismatch. ${Math.round(dist)}m away.` });
 
         session.attendees.push({
             student_id: studentId,
