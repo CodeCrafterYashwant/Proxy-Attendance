@@ -206,7 +206,7 @@ startBtn.addEventListener("click", async () => {
                 sessionResult.style.display = "block";
                 document.getElementById("setupSection").style.display = "none";
                 
-                startTimer(60);
+                startTimer(300);
                 loadHistory(); 
             } else {
                 alert(data.message || "Failed to create session.");
