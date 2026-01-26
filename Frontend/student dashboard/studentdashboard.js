@@ -123,32 +123,38 @@ document.addEventListener("DOMContentLoaded", () => {
 // ==========================================
 function initTheme() {
     const toggleBtn = document.getElementById("themeToggleBtn");
-    const icon = toggleBtn.querySelector("i");
-    const text = toggleBtn.querySelector("a"); // or just update innerHTML
     const body = document.body;
+    
+    // Safety Check: Does the button exist?
+    if (!toggleBtn) {
+        console.error("❌ Error: 'themeToggleBtn' not found in HTML. Did you add the <li> to the sidebar?");
+        return;
+    }
 
-    // 1. Check Saved Theme on Load
+    const linkTag = toggleBtn.querySelector("a"); // Find the link inside the list item
+
+    // 1. Load Saved Theme
     const savedTheme = localStorage.getItem("theme");
     if (savedTheme === "dark") {
         body.setAttribute("data-theme", "dark");
-        icon.className = "ri-sun-line"; // Change icon to Sun
-        text.innerHTML = `<i class="ri-sun-line"></i> Light Mode`;
+        if (linkTag) linkTag.innerHTML = `<i class="ri-sun-line"></i> Light Mode`;
     }
 
-    // 2. Toggle Logic
+    // 2. Click Event
     toggleBtn.addEventListener("click", (e) => {
-        e.preventDefault(); // Prevent link jump
-        
+        e.preventDefault(); // Stop page from jumping
+        console.log("Theme button clicked!");
+
         if (body.getAttribute("data-theme") === "dark") {
-            // Switch to Light
+            // Switch to LIGHT
             body.removeAttribute("data-theme");
             localStorage.setItem("theme", "light");
-            text.innerHTML = `<i class="ri-moon-line"></i> Dark Mode`;
+            if (linkTag) linkTag.innerHTML = `<i class="ri-moon-line"></i> Dark Mode`;
         } else {
-            // Switch to Dark
+            // Switch to DARK
             body.setAttribute("data-theme", "dark");
             localStorage.setItem("theme", "dark");
-            text.innerHTML = `<i class="ri-sun-line"></i> Light Mode`;
+            if (linkTag) linkTag.innerHTML = `<i class="ri-sun-line"></i> Light Mode`;
         }
     });
 }
