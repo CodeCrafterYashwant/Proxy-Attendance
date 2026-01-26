@@ -1,150 +1,65 @@
 // ==========================================
-// 1. CONFIGURATION
+// CONFIGURATION
 // ==========================================
 const API_HISTORY_URL = "https://temp-zw0w.onrender.com/attendance/history";
+const historyContainer = document.getElementById("recentAttendanceList");
 
 // ==========================================
-// 2. INITIALIZATION (Runs when page loads)
+// INITIALIZATION
 // ==========================================
 document.addEventListener("DOMContentLoaded", () => {
-    console.log("Dashboard Loaded...");
-    
-    // UI FIRST: Initialize Calendar (This makes arrows work immediately)
-    initCalendar();
-    
-    // DATA SECOND: Load Attendance History
     loadStudentDashboardHistory();
 });
 
 // ==========================================
-// 3. CALENDAR LOGIC
-// ==========================================
-let currentDate = new Date();
-
-function initCalendar() {
-    // Select elements INSIDE the function to ensure they exist
-    const prevBtn = document.getElementById("prevMonth");
-    const nextBtn = document.getElementById("nextMonth");
-
-    // Render the calendar immediately
-    renderCalendar();
-
-    // Attach Click Listeners
-    if (prevBtn) {
-        prevBtn.addEventListener("click", () => {
-            currentDate.setMonth(currentDate.getMonth() - 1);
-            renderCalendar();
-        });
-    } else {
-        console.error("Error: 'prevMonth' arrow button not found.");
-    }
-
-    if (nextBtn) {
-        nextBtn.addEventListener("click", () => {
-            currentDate.setMonth(currentDate.getMonth() + 1);
-            renderCalendar();
-        });
-    } else {
-        console.error("Error: 'nextMonth' arrow button not found.");
-    }
-}
-
-function renderCalendar() {
-    const monthYearText = document.getElementById("currentMonthYear");
-    const calendarGrid = document.getElementById("calendarGrid");
-
-    if (!calendarGrid) return;
-
-    const year = currentDate.getFullYear();
-    const month = currentDate.getMonth();
-
-    // Update Header Text
-    const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-    if (monthYearText) monthYearText.innerText = `${monthNames[month]} ${year}`;
-
-    // Calculate Dates
-    const firstDay = new Date(year, month, 1).getDay(); 
-    const lastDate = new Date(year, month + 1, 0).getDate(); 
-    const lastDatePrevMonth = new Date(year, month, 0).getDate(); 
-
-    // Clear Grid
-    calendarGrid.innerHTML = "";
-
-    // 1. Previous Month Padding
-    for (let i = firstDay; i > 0; i--) {
-        const div = document.createElement("div");
-        div.className = "calendar-date inactive";
-        div.innerText = lastDatePrevMonth - i + 1;
-        calendarGrid.appendChild(div);
-    }
-
-    // 2. Current Month Days
-    const today = new Date();
-    for (let i = 1; i <= lastDate; i++) {
-        const div = document.createElement("div");
-        div.className = "calendar-date";
-        div.innerText = i;
-
-        // Highlight Today
-        if (i === today.getDate() && month === today.getMonth() && year === today.getFullYear()) {
-            div.classList.add("today");
-        }
-        calendarGrid.appendChild(div);
-    }
-}
-
-// ==========================================
-// 4. HISTORY LOGIC
+// MAIN FUNCTION: LOAD HISTORY
 // ==========================================
 async function loadStudentDashboardHistory() {
-    const historyContainer = document.getElementById("recentAttendanceList");
     const token = localStorage.getItem("token");
 
-    // If container is missing, stop (prevents crash)
-    if (!historyContainer) return;
-
+    // 1. Check if token exists locally
     if (!token) {
-        historyContainer.innerHTML = `<p style="text-align:center; padding:20px; color:#888;">Please login to view history.</p>`;
-        // Optional: Redirect
-        // window.location.href = "../login page/login.html"; 
+        window.location.href = "../index.html"; // Redirect if missing
         return;
     }
 
     try {
+        // 2. Fetch Data from Backend
         const response = await fetch(API_HISTORY_URL, {
             headers: { "Authorization": `Bearer ${token}` }
         });
 
-        // Check for Session Expiry
+        // 3. Handle Token Expiry (401 Unauthorized)
         if (response.status === 401) {
-            historyContainer.innerHTML = `<p style="text-align:center; padding:20px; color:red;">Session expired.</p>`;
             alert("Session Expired. Please login again.");
             localStorage.removeItem("token");
-            window.location.href = "../login page/login.html";
+            window.location.href = "../index.html";
             return;
         }
 
         const data = await response.json();
 
-        historyContainer.innerHTML = ""; // Clear "Loading..."
+        // Clear "Loading..." text
+        historyContainer.innerHTML = "";
 
-        // Check if data exists
+        // 4. Handle Empty Data
         if (!data || data.length === 0) {
             historyContainer.innerHTML = `<p style="text-align:center; padding:20px; color:#888;">No attendance marked yet.</p>`;
             return;
         }
 
-        // Reverse to show newest first, then take top 5
-        // Note: Check if data is array. If backend returns {message: ...}, this might fail.
-        const recentRecords = Array.isArray(data) ? data.reverse().slice(0, 5) : [];
+        // 5. Sort & Slice (Latest 5 records)
+        // Note: If your API returns oldest first, use reverse(). If newest first, remove reverse().
+        const recentRecords = data.reverse().slice(0, 5);
 
+        // 6. Generate Rows
         recentRecords.forEach(record => {
             const session = record.session_id || {};
             
             // Safe Data Handling
             const subject = session.class_name || session.className || "Unknown Class";
             
-            // Date Formatting
+            // Date Parsing
             const rawDate = record.createdAt || record.timestamp || session.createdAt;
             let dateStr = "N/A";
             let timeStr = "--:--";
@@ -157,14 +72,14 @@ async function loadStudentDashboardHistory() {
                 }
             }
 
-            // Create Row
+            // Create Row Element
             const row = document.createElement("div");
             row.className = "history-row";
             
-            // INLINE STYLES to ensure grid works even if CSS fails
+            // Apply Grid Styles (matches HTML header: Subject | Date | Time | Status)
             row.style.display = "grid";
-            row.style.gridTemplateColumns = "1.5fr 1fr 1fr 1fr"; 
-            row.style.padding = "15px";
+            row.style.gridTemplateColumns = "1.5fr 1fr 1fr 1fr";
+            row.style.padding = "12px 15px";
             row.style.borderBottom = "1px solid #eee";
             row.style.alignItems = "center";
             row.style.fontSize = "0.9rem";
@@ -188,3 +103,6 @@ async function loadStudentDashboardHistory() {
         historyContainer.innerHTML = `<p style="text-align:center; color:red; padding:20px;">Failed to load history.</p>`;
     }
 }
+// ==========================================
+// END
+// ==========================================
