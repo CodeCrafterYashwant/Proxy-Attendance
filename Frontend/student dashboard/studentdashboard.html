@@ -7,6 +7,47 @@
   
   <link href="https://cdn.jsdelivr.net/npm/remixicon@4.8.0/fonts/remixicon.css" rel="stylesheet" />
   <link rel="stylesheet" href="studentdashboard.css">
+  
+  <style>
+    /* --- GALLERY STYLES --- */
+    .dashboard-gallery {
+      margin-top: 30px;
+    }
+    
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Responsive Grid */
+      gap: 15px;
+      margin-top: 15px;
+    }
+
+    .gallery-img {
+      width: 100%;
+      height: 180px; /* Fixed height for uniformity */
+      object-fit: cover; /* Crops image nicely */
+      border-radius: 12px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: pointer;
+    }
+
+    .gallery-img:hover {
+      transform: scale(1.02);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    }
+    
+    /* Notice Styles (from previous step) */
+    .icon-box.red { background: #fef2f2; color: #dc2626; }
+    .icon-box.yellow { background: #fffbeb; color: #d97706; }
+    .icon-box.blue { background: #eff6ff; color: #3b82f6; }
+    .icon-box.green { background: #f0fdf4; color: #16a34a; }
+    
+    .notice-item {
+      display: flex; align-items: center; gap: 15px; padding: 12px 0; border-bottom: 1px solid #f1f5f9;
+    }
+    .notice-item:last-child { border-bottom: none; }
+    .notice-title { font-weight: 600; font-size: 0.9rem; color: #333; margin: 0; }
+    .notice-date { font-size: 0.75rem; color: #94a3b8; }
+  </style>
 </head>
 <body>
 
@@ -20,6 +61,7 @@
         <li><a href="attendance.html"><i class="ri-checkbox-circle-line"></i> Mark Attendance</a></li>
         <li><a href="analytics.html"><i class="ri-bar-chart-grouped-line"></i> Analytics</a></li>
         <li><a href="change-password.html"><i class="ri-lock-password-line"></i> Change Password</a></li>
+        <li><a href="maintainance.html"><i class="ri-account-circle-line"></i> Face Recognition</a></li>
       </ul>
       <div class="logout-section">
         <a href="#" id="logoutBtn" class="logout-btn"><i class="ri-logout-box-line"></i> Logout</a>
@@ -35,7 +77,7 @@
             <h2 id="studentName">Welcome back!</h2> 
             <p>Here is your latest attendance overview.</p>
           </div>
-          <img src="https://cdn-icons-png.flaticon.com/512/3406/3406223.png" alt="Study" style="opacity: 0.9; height: 100px;"> 
+          <img src="https://cdn-icons-png.flaticon.com/512/566/566985.png" alt="Study" style="opacity: 0.9; height: 100px;"> 
         </section>
 
         <div class="card recent-history" style="margin-top: 30px;">
@@ -59,29 +101,31 @@
         <div class="card dashboard-gallery">
           <h3><i class="ri-image-2-line"></i> Campus Life</h3>
           <div class="gallery-grid">
-            <img src="2-kids-girl-and-boy-friends-school-student-studying-in-a-classroom-GDB3DN.jpg" alt="Students" class="gallery-img">
-            <img src="Students-in-classroom.jpg" alt="Classroom" class="gallery-img">
-            <img src="OIP.PUVuvpSEeEsWJN51rAokPwHaE8.jpg" alt="Campus" class="gallery-img">
-            <img src="teenagers-playing-basketball-game-together.jpg" alt="Sports" class="gallery-img">
+            
+            <img src="https://www.aaascholarships.org/wp-content/uploads/2015/12/Students-in-classroom.jpg" 
+                 alt="Students Studying" class="gallery-img">
+            
+            <img src="https://tse3.mm.bing.net/th/id/OIP.PUVuvpSEeEsWJN51rAokPwHaE8?pid=Api&P=0&h=180" 
+                 alt="Classroom View" class="gallery-img">
+            
+            <img src="https://media.istockphoto.com/id/484716662/photo/teenagers-playing-basketball-game-together.jpg?s=612x612&w=0&k=20&c=HNOelATOKYufFqZvtu8x_clI4h_crmCRvc2iaDw7hu4=" 
+                 alt="Campus Activity" class="gallery-img">
+            
+            <img src="https://wpvip.edutopia.org/wp-content/uploads/2024/12/hero_blog_Brain-Based-Learning_Teaching-Strategies_photo_iStock_2154414848_SeventyFour.jpg?w=2880&quality=85" 
+                 alt="Sports" class="gallery-img">
+
           </div>
         </div>
-
-      </main>
+        </main>
 
       <aside class="right-panel">
         
         <div class="calendar-card">
           <div class="calendar-header">
             <h3 id="currentMonthYear">Month Year</h3>
-            <div class="calendar-nav">
-              <i class="ri-arrow-left-s-line" id="prevMonth"></i>
-              <i class="ri-arrow-right-s-line" id="nextMonth"></i>
+          </div>
+          <div class="calendar-grid" id="calendarGrid">
             </div>
-          </div>
-          <div class="calendar-days">
-            <span>S</span><span>M</span><span>T</span><span>W</span><span>T</span><span>F</span><span>S</span>
-          </div>
-          <div class="calendar-grid" id="calendarGrid"></div>
         </div>
 
         <div class="card notice-board">
@@ -94,6 +138,7 @@
               <span class="notice-date">Start Date: Feb 10, 2026</span>
             </div>
           </div>
+
           <div class="notice-item">
             <div class="icon-box green"><i class="ri-flag-2-line"></i></div>
             <div>
@@ -101,6 +146,7 @@
               <span class="notice-date">Mon, Jan 26, 2026</span>
             </div>
           </div>
+
           <div class="notice-item">
             <div class="icon-box yellow"><i class="ri-money-dollar-circle-line"></i></div>
             <div>
@@ -108,6 +154,7 @@
               <span class="notice-date">Due: Jan 30, 2026</span>
             </div>
           </div>
+
           <div class="notice-item">
             <div class="icon-box blue"><i class="ri-presentation-line"></i></div>
             <div>
@@ -123,6 +170,35 @@
 
   <script src="student-common.js"></script>
   <script src="studentdashboard.js"></script>
+  
+  <script>
+    const calendarGrid = document.getElementById("calendarGrid");
+    const monthYear = document.getElementById("currentMonthYear");
+    const date = new Date();
+    
+    if(monthYear) monthYear.innerText = date.toLocaleString('default', { month: 'long', year: 'numeric' });
+
+    if(calendarGrid) {
+      const daysInMonth = new Date(date.getFullYear(), date.getMonth() + 1, 0).getDate();
+      calendarGrid.style.display = 'grid';
+      calendarGrid.style.gridTemplateColumns = 'repeat(7, 1fr)';
+      calendarGrid.style.gap = '5px';
+      calendarGrid.style.textAlign = 'center';
+      
+      for(let i=1; i<=daysInMonth; i++) {
+        const d = document.createElement("div");
+        d.innerText = i;
+        d.style.padding = "5px";
+        d.style.fontSize = "0.8rem";
+        if(i === date.getDate()) {
+          d.style.background = "#5b6cff";
+          d.style.color = "white";
+          d.style.borderRadius = "50%";
+        }
+        calendarGrid.appendChild(d);
+      }
+    }
+  </script>
 
 </body>
 </html>
