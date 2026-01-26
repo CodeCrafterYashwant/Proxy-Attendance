@@ -22,7 +22,7 @@ An intelligent, automated solution designed to modernize the way attendance is r
 
 | Layer | Technology |
 | :--- | :--- |
-| **Frontend** | React.js, Tailwind CSS, Lucide Icons |
+| **Frontend** |HTML5, CSS3, JavaScript (Vanilla) |
 | **Backend** | Node.js, Express.js |
 | **Database** | MongoDB (NoSQL) |
 | **Security** | JSON Web Tokens (JWT) & Bcrypt Encryption |
