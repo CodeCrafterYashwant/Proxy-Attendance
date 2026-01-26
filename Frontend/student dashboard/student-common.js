@@ -102,62 +102,137 @@ function loadDashboardHistory() {
 /* =========================================
    5. LIVE CALENDAR GENERATOR
    ========================================= */
+// function renderLiveCalendar() {
+//     const calendarGrid = document.getElementById("calendarGrid");
+//     const monthYearEl = document.getElementById("currentMonthYear");
+
+//     // Only run if elements exist (i.e., on the Dashboard page)
+//     if (!calendarGrid || !monthYearEl) return;
+
+//     const date = new Date();
+//     const currentMonth = date.getMonth();
+//     const currentYear = date.getFullYear();
+//     const today = date.getDate();
+
+//     const monthNames = [
+//         "January", "February", "March", "April", "May", "June", 
+//         "July", "August", "September", "October", "November", "December"
+//     ];
+
+//     // 1. Set Header (e.g., "January 2026")
+//     monthYearEl.textContent = `${monthNames[currentMonth]} ${currentYear}`;
+//     calendarGrid.innerHTML = "";
+
+//     // 2. Render Day Names (Mon, Tue...)
+//     const days = ["M", "T", "W", "T", "F", "S", "S"];
+//     days.forEach(day => {
+//         const dayEl = document.createElement("div");
+//         dayEl.className = "day-name";
+//         dayEl.textContent = day;
+//         calendarGrid.appendChild(dayEl);
+//     });
+
+//     // 3. Calculate Padding (Empty slots before the 1st of the month)
+//     // getDay() returns 0 for Sunday. We shift it so Monday is 0.
+//     const firstDayIndex = new Date(currentYear, currentMonth, 1).getDay();
+//     const adjustedFirstDay = firstDayIndex === 0 ? 6 : firstDayIndex - 1; 
+
+//     // 4. Calculate Total Days in Month
+//     const lastDay = new Date(currentYear, currentMonth + 1, 0).getDate();
+
+//     // 5. Render Empty Slots
+//     for (let i = 0; i < adjustedFirstDay; i++) {
+//         const emptyEl = document.createElement("div");
+//         emptyEl.className = "empty-slot";
+//         calendarGrid.appendChild(emptyEl);
+//     }
+
+//     // 6. Render Dates
+//     for (let i = 1; i <= lastDay; i++) {
+//         const dateEl = document.createElement("div");
+//         dateEl.className = "cal-date";
+//         dateEl.textContent = i;
+
+//         // Highlight Today
+//         if (i === today) {
+//             dateEl.classList.add("today");
+//         }
+
+//         calendarGrid.appendChild(dateEl);
+//     }
+// }
+
+
+
+// --- CALENDAR LOGIC (Interactive) ---
+
+
+
+
+
+const monthYearText = document.getElementById("currentMonthYear");
+const calendarGrid = document.getElementById("calendarGrid");
+const prevMonthBtn = document.getElementById("prevMonth");
+const nextMonthBtn = document.getElementById("nextMonth");
+
+let currentDate = new Date();
+
 function renderLiveCalendar() {
-    const calendarGrid = document.getElementById("calendarGrid");
-    const monthYearEl = document.getElementById("currentMonthYear");
+    const year = currentDate.getFullYear();
+    const month = currentDate.getMonth();
 
-    // Only run if elements exist (i.e., on the Dashboard page)
-    if (!calendarGrid || !monthYearEl) return;
+    // 1. Update Header Text
+    const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+    if(monthYearText) monthYearText.innerText = `${monthNames[month]} ${year}`;
 
-    const date = new Date();
-    const currentMonth = date.getMonth();
-    const currentYear = date.getFullYear();
-    const today = date.getDate();
+    // 2. Calculate Date Offsets
+    const firstDay = new Date(year, month, 1).getDay(); // Day of week (0-6)
+    const lastDate = new Date(year, month + 1, 0).getDate(); // Days in current month
+    const lastDatePrevMonth = new Date(year, month, 0).getDate(); // Days in prev month
 
-    const monthNames = [
-        "January", "February", "March", "April", "May", "June", 
-        "July", "August", "September", "October", "November", "December"
-    ];
-
-    // 1. Set Header (e.g., "January 2026")
-    monthYearEl.textContent = `${monthNames[currentMonth]} ${currentYear}`;
+    if(!calendarGrid) return;
     calendarGrid.innerHTML = "";
 
-    // 2. Render Day Names (Mon, Tue...)
-    const days = ["M", "T", "W", "T", "F", "S", "S"];
-    days.forEach(day => {
-        const dayEl = document.createElement("div");
-        dayEl.className = "day-name";
-        dayEl.textContent = day;
-        calendarGrid.appendChild(dayEl);
-    });
-
-    // 3. Calculate Padding (Empty slots before the 1st of the month)
-    // getDay() returns 0 for Sunday. We shift it so Monday is 0.
-    const firstDayIndex = new Date(currentYear, currentMonth, 1).getDay();
-    const adjustedFirstDay = firstDayIndex === 0 ? 6 : firstDayIndex - 1; 
-
-    // 4. Calculate Total Days in Month
-    const lastDay = new Date(currentYear, currentMonth + 1, 0).getDate();
-
-    // 5. Render Empty Slots
-    for (let i = 0; i < adjustedFirstDay; i++) {
-        const emptyEl = document.createElement("div");
-        emptyEl.className = "empty-slot";
-        calendarGrid.appendChild(emptyEl);
+    // 3. Render Previous Month Padding (Inactive Days)
+    for (let i = firstDay; i > 0; i--) {
+        const div = document.createElement("div");
+        div.className = "calendar-date inactive";
+        div.innerText = lastDatePrevMonth - i + 1;
+        calendarGrid.appendChild(div);
     }
 
-    // 6. Render Dates
-    for (let i = 1; i <= lastDay; i++) {
-        const dateEl = document.createElement("div");
-        dateEl.className = "cal-date";
-        dateEl.textContent = i;
+    // 4. Render Current Month Days
+    const today = new Date();
+    for (let i = 1; i <= lastDate; i++) {
+        const div = document.createElement("div");
+        div.className = "calendar-date";
+        div.innerText = i;
 
         // Highlight Today
-        if (i === today) {
-            dateEl.classList.add("today");
+        if (i === today.getDate() && month === today.getMonth() && year === today.getFullYear()) {
+            div.classList.add("today");
         }
-
-        calendarGrid.appendChild(dateEl);
+        calendarGrid.appendChild(div);
     }
 }
+
+// 5. Add Event Listeners for Buttons
+if(prevMonthBtn) {
+    prevMonthBtn.addEventListener("click", () => {
+        currentDate.setMonth(currentDate.getMonth() - 1);
+        renderCalendar();
+    });
+}
+
+if(nextMonthBtn) {
+    nextMonthBtn.addEventListener("click", () => {
+        currentDate.setMonth(currentDate.getMonth() + 1);
+        renderCalendar();
+    });
+}
+
+// Initialize on Load
+document.addEventListener("DOMContentLoaded", () => {
+    // ... existing load history code ...
+    renderLiveCalendar(); 
+});
