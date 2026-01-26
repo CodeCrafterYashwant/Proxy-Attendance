@@ -106,3 +106,49 @@ async function loadStudentDashboardHistory() {
 // ========================================== 
 // END
 // ==========================================
+
+// ... existing code ...
+
+document.addEventListener("DOMContentLoaded", () => {
+    // ... existing init functions ...
+    initCalendar();
+    loadStudentDashboardHistory();
+    
+    // 👇 ADD THIS LINE
+    initTheme(); 
+});
+
+// ==========================================
+// 5. THEME SWITCHER LOGIC
+// ==========================================
+function initTheme() {
+    const toggleBtn = document.getElementById("themeToggleBtn");
+    const icon = toggleBtn.querySelector("i");
+    const text = toggleBtn.querySelector("a"); // or just update innerHTML
+    const body = document.body;
+
+    // 1. Check Saved Theme on Load
+    const savedTheme = localStorage.getItem("theme");
+    if (savedTheme === "dark") {
+        body.setAttribute("data-theme", "dark");
+        icon.className = "ri-sun-line"; // Change icon to Sun
+        text.innerHTML = `<i class="ri-sun-line"></i> Light Mode`;
+    }
+
+    // 2. Toggle Logic
+    toggleBtn.addEventListener("click", (e) => {
+        e.preventDefault(); // Prevent link jump
+        
+        if (body.getAttribute("data-theme") === "dark") {
+            // Switch to Light
+            body.removeAttribute("data-theme");
+            localStorage.setItem("theme", "light");
+            text.innerHTML = `<i class="ri-moon-line"></i> Dark Mode`;
+        } else {
+            // Switch to Dark
+            body.setAttribute("data-theme", "dark");
+            localStorage.setItem("theme", "dark");
+            text.innerHTML = `<i class="ri-sun-line"></i> Light Mode`;
+        }
+    });
+}
