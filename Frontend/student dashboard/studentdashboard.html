@@ -35,7 +35,7 @@
       box-shadow: 0 10px 20px rgba(0,0,0,0.1);
     }
     
-    /* Notice Styles (from previous step) */
+    /* Notice Styles */
     .icon-box.red { background: #fef2f2; color: #dc2626; }
     .icon-box.yellow { background: #fffbeb; color: #d97706; }
     .icon-box.blue { background: #eff6ff; color: #3b82f6; }
@@ -101,29 +101,31 @@
         <div class="card dashboard-gallery">
           <h3><i class="ri-image-2-line"></i> Campus Life</h3>
           <div class="gallery-grid">
-            
-            <img src="https://www.aaascholarships.org/wp-content/uploads/2015/12/Students-in-classroom.jpg" 
-                 alt="Students Studying" class="gallery-img">
-            
-            <img src="https://tse3.mm.bing.net/th/id/OIP.PUVuvpSEeEsWJN51rAokPwHaE8?pid=Api&P=0&h=180" 
-                 alt="Classroom View" class="gallery-img">
-            
-            <img src="https://media.istockphoto.com/id/484716662/photo/teenagers-playing-basketball-game-together.jpg?s=612x612&w=0&k=20&c=HNOelATOKYufFqZvtu8x_clI4h_crmCRvc2iaDw7hu4=" 
-                 alt="Campus Activity" class="gallery-img">
-            
-            <img src="https://wpvip.edutopia.org/wp-content/uploads/2024/12/hero_blog_Brain-Based-Learning_Teaching-Strategies_photo_iStock_2154414848_SeventyFour.jpg?w=2880&quality=85" 
-                 alt="Sports" class="gallery-img">
-
+            <img src="https://www.aaascholarships.org/wp-content/uploads/2015/12/Students-in-classroom.jpg" alt="Students Studying" class="gallery-img">
+            <img src="https://tse3.mm.bing.net/th/id/OIP.PUVuvpSEeEsWJN51rAokPwHaE8?pid=Api&P=0&h=180" alt="Classroom View" class="gallery-img">
+            <img src="https://media.istockphoto.com/id/484716662/photo/teenagers-playing-basketball-game-together.jpg?s=612x612&w=0&k=20&c=HNOelATOKYufFqZvtu8x_clI4h_crmCRvc2iaDw7hu4=" alt="Campus Activity" class="gallery-img">
+            <img src="https://wpvip.edutopia.org/wp-content/uploads/2024/12/hero_blog_Brain-Based-Learning_Teaching-Strategies_photo_iStock_2154414848_SeventyFour.jpg?w=2880&quality=85" alt="Sports" class="gallery-img">
           </div>
         </div>
-        </main>
+      </main>
 
       <aside class="right-panel">
         
         <div class="calendar-card">
           <div class="calendar-header">
             <h3 id="currentMonthYear">Month Year</h3>
+            
+            <div class="calendar-nav">
+              <i class="ri-arrow-left-s-line" id="prevMonth" style="cursor: pointer; font-size: 1.2rem; color: #5b6cff; padding: 5px;"></i>
+              <i class="ri-arrow-right-s-line" id="nextMonth" style="cursor: pointer; font-size: 1.2rem; color: #5b6cff; padding: 5px;"></i>
+            </div>
+            
           </div>
+
+          <div class="calendar-days" style="display: grid; grid-template-columns: repeat(7, 1fr); text-align: center; font-weight: 600; font-size: 0.8rem; color: #94a3b8; margin-bottom: 10px;">
+            <span>S</span><span>M</span><span>T</span><span>W</span><span>T</span><span>F</span><span>S</span>
+          </div>
+
           <div class="calendar-grid" id="calendarGrid">
             </div>
         </div>
@@ -171,34 +173,5 @@
   <script src="student-common.js"></script>
   <script src="studentdashboard.js"></script>
   
-  <script>
-    const calendarGrid = document.getElementById("calendarGrid");
-    const monthYear = document.getElementById("currentMonthYear");
-    const date = new Date();
-    
-    if(monthYear) monthYear.innerText = date.toLocaleString('default', { month: 'long', year: 'numeric' });
-
-    if(calendarGrid) {
-      const daysInMonth = new Date(date.getFullYear(), date.getMonth() + 1, 0).getDate();
-      calendarGrid.style.display = 'grid';
-      calendarGrid.style.gridTemplateColumns = 'repeat(7, 1fr)';
-      calendarGrid.style.gap = '5px';
-      calendarGrid.style.textAlign = 'center';
-      
-      for(let i=1; i<=daysInMonth; i++) {
-        const d = document.createElement("div");
-        d.innerText = i;
-        d.style.padding = "5px";
-        d.style.fontSize = "0.8rem";
-        if(i === date.getDate()) {
-          d.style.background = "#5b6cff";
-          d.style.color = "white";
-          d.style.borderRadius = "50%";
-        }
-        calendarGrid.appendChild(d);
-      }
-    }
-  </script>
-
 </body>
 </html>
