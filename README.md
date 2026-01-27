@@ -8,6 +8,15 @@ An intelligent, automated solution designed to modernize the way attendance is r
 
 ---
 
+## 🚀 Live Demo
+
+The application is fully deployed and operational:
+
+* **Main Dashboard (Login):** [https://antiproxy.netlify.app](https://antiproxy.netlify.app)
+* **User Registration:** [https://antiproxy.netlify.app/signup%20page/signup.html](https://antiproxy.netlify.app/signup%20page/signup.html)
+
+> **Deployment Note:** The frontend is hosted on **Netlify** and the backend is on **Render**. Since Render's free tier spins down after inactivity, please allow **15-30 seconds** for the backend to "wake up" during the first request.
+
 ## 🌟 Key Features
 
 * **Secure Authentication:** Role-based access control for Administrators, Teachers, and Students.
@@ -22,11 +31,11 @@ An intelligent, automated solution designed to modernize the way attendance is r
 
 | Layer | Technology |
 | :--- | :--- |
-| **Frontend** |HTML5, CSS3, JavaScript (Vanilla) |
+| **Frontend** | HTML5, CSS3, JavaScript (Vanilla) |
 | **Backend** | Node.js, Express.js |
 | **Database** | MongoDB (NoSQL) |
 | **Security** | JSON Web Tokens (JWT) & Bcrypt Encryption |
-
+| **Hosting** | Netlify (Frontend) & Render (Backend) |
 ---
 
 ## 📈 System Workflow
@@ -89,14 +98,15 @@ Follow these instructions to get a copy of the project up and running on your lo
 ## 📂 Project Structure
 
 ```text
-├── client/             # React.js Frontend
-├── server/             # Node.js API
-│   ├── models/         # MongoDB Schemas (User, Attendance, Class)
-│   ├── controllers/    # Business Logic & Request Handlers
-│   ├── routes/         # Express API Endpoints
-│   └── middleware/     # Auth (JWT) & Error Handling
+├── signup page/        # Signup HTML, CSS, and Client-side logic
+├── client/             # Main application dashboard and assets
+├── server/             # Node.js API (Backend)
+│   ├── models/         # MongoDB Schemas
+│   ├── controllers/    # Request Handling & Logic
+│   ├── routes/         # API Endpoints
+│   └── middleware/     # JWT Auth & Security
 └── README.md
-
+```
 ###Contributing
 Contributions make the open-source community an amazing place to learn and create.
 
@@ -110,12 +120,11 @@ Push to the Branch (git push origin feature/AmazingFeature).
 
 Open a Pull Request.
 
-👤 Author
-Yashwant
+## 👤 Author
 
-GitHub: @CodeCrafterYashwant
-
-
+**Yashwant**
+* **GitHub:** [@CodeCrafterYashwant](https://github.com/CodeCrafterYashwant)
+* **LinkedIn:** [yashwantnamdev](https://www.linkedin.com/yashwantnamdev)
 
 📄 License
 Distributed under the MIT License. See LICENSE for more information.
