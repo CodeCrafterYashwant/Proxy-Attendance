@@ -12,8 +12,8 @@ An intelligent, automated solution designed to modernize the way attendance is r
 
 The application is fully deployed and operational:
 
-* **Main Dashboard (Login):** [https://antiproxy.netlify.app](https://antiproxy.netlify.app)
-* **User Registration:** [https://antiproxy.netlify.app/signup%20page/signup.html](https://antiproxy.netlify.app/signup%20page/signup.html)
+* **Main Dashboard (Login):** [https://anntiproxy.netlify.app](https://anntiproxy.netlify.app)
+* **User Registration:** [https://anntiproxy.netlify.app/signup%20page/signup.html](https://anntiproxy.netlify.app/signup%20page/signup.html)
 
 > **Deployment Note:** The frontend is hosted on **Netlify** and the backend is on **Render**. Since Render's free tier spins down after inactivity, please allow **15-30 seconds** for the backend to "wake up" during the first request.
 
