@@ -10,10 +10,8 @@ const generateAccessAndRefreshTokens = async (userId) => {
     try {
         const user = await User.findById(userId);
         const accessToken = user.generateAccessToken();
-        console.log(accessToken);
         const refreshToken = user.generateRefreshToken();
         user.refreshToken = refreshToken;
-        console.log(refreshToken);
         await user.save({ validateBeforeSave: false });
         return { accessToken, refreshToken };
     } catch (error) {
@@ -30,7 +28,6 @@ const registerUser = asyncHandler(async (req, res) => {
     const email = data.email;
     const password = "12345";
     data.password = password;
-    console.log(name, email, password);
     if ([name, email, password].some((field) => field?.trim() === "")) {
         throw new ApiError(400, "All fields are required");
     }
