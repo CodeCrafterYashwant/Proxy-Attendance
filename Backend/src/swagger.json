@@ -8,7 +8,7 @@
   "host": "https://temp-zw0w.onrender.com",
   "basePath": "/",
   "schemes": [
-    "http"
+    "https"
   ],
   "paths": {
     "/user/signup": {
