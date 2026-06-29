@@ -17,5 +17,5 @@ router.route("/create_session").post(verifyJWT, createSession);
 router.route("/faculty/history").get(verifyJWT, facultyHistory);
 router.route("/report/:sessionId").get(verifyJWT, sessionHistory);
 router.route("/mark").post(verifyJWT, markAttendence);
-router.route("/session-otp").get(verifyJWT, getSessionOtp);
+router.route("/session-otp/:sessionId").get(verifyJWT, getSessionOtp);
 export default router;
