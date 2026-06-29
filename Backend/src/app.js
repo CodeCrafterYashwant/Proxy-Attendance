@@ -3,6 +3,12 @@ import cookieParser from "cookie-parser";
 import cors from "cors";
 import morgan from "morgan";
 const app = express();
+import swaggerUi from 'swagger-ui-express';
+import swaggerDocument from './swagger.json' with { type: 'json' };
+
+
+
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 app.use(
     cors({
