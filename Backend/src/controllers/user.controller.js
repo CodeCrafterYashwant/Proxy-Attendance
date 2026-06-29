@@ -26,7 +26,7 @@ const registerUser = asyncHandler(async (req, res) => {
     const data = req.body;
     const name = data.name;
     const email = data.email;
-    const password = "12345";
+    const password = "123456";
     data.password = password;
     if ([name, email, password].some((field) => field?.trim() === "")) {
         throw new ApiError(400, "All fields are required");
@@ -171,7 +171,7 @@ const changeCurrentPassword = asyncHandler(async (req, res) => {
         throw new ApiError(400, "Invalid old password");
     }
     user.password = newPassword;
-    if (oldPassword == "12345") {
+    if (oldPassword == "123456") {
         user.is_default_password = false;
     } else {
         user.is_default_password = true;
