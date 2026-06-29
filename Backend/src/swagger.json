@@ -5,7 +5,7 @@
     "description": "Description",
     "version": "1.0.0"
   },
-  "host": "https://temp-zw0w.onrender.com",
+  "host": "temp-zw0w.onrender.com",
   "basePath": "/",
   "schemes": [
     "https"
